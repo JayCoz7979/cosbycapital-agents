@@ -1,0 +1,13 @@
+{
+  "name": "capital-grant-finder",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Daily grant scraper from Grants.gov — runs at 6:00 AM UTC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

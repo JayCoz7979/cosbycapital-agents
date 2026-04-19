@@ -1,0 +1,13 @@
+{
+  "name": "capital-deadline-monitor",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Daily grant deadline monitor — runs at 8:00 AM UTC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

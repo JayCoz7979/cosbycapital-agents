@@ -1,0 +1,13 @@
+{
+  "name": "capital-opportunity-digest",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Weekly personalized opportunity digest emails — runs Monday at 9:00 AM UTC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

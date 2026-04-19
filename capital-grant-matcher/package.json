@@ -1,0 +1,14 @@
+{
+  "name": "capital-grant-matcher",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Daily Claude AI grant matcher — runs at 7:00 AM UTC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

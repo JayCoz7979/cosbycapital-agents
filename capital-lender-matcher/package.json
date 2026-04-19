@@ -1,0 +1,14 @@
+{
+  "name": "capital-lender-matcher",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Weekly Claude AI lender matcher — runs Monday at 8:00 AM UTC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}
