@@ -30,7 +30,7 @@ CLIENT PROFILE:
 
 AVAILABLE LENDERS (${lenders.length} total):
 ${lenders.slice(0, 30).map((l, i) =>
-  `${i + 1}. ${l.name} | Type: ${l.lender_type} | Min: $${l.min_loan?.toLocaleString()} - Max: $${l.max_loan?.toLocaleString()} | Min Credit: ${l.min_credit_score} | Min Revenue: $${l.min_annual_revenue?.toLocaleString()} | Min Years: ${l.min_years_in_business} | Industries: ${l.industries?.join(", ")} | States: ${l.states?.join(", ")}`
+  `${i + 1}. ${l.name} | Type: ${l.type} | Min: $${l.min_loan?.toLocaleString()} - Max: $${l.max_loan?.toLocaleString()} | Min Credit: ${l.min_credit_score} | Min Revenue: $${l.min_annual_revenue?.toLocaleString()} | Min Years: ${l.min_years_in_business} | Industries: ${l.industries?.join(", ")} | States: ${l.states?.join(", ")}`
 ).join("\n")}
 
 Return a JSON array of the TOP 5 best lender matches. For each match include:
@@ -69,7 +69,7 @@ async function sendLenderMatchEmail(profile, matches, lenders) {
         <h3 style="margin:0 0 4px;color:#0A1628;font-size:14px;">${lender.name}</h3>
         <span style="background:#eff6ff;color:#1d4ed8;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;">${m.match_score}% match</span>
       </div>
-      <p style="margin:0 0 8px;color:#6b7280;font-size:12px;">${lender.lender_type} • Up to $${lender.max_loan?.toLocaleString()} • ${m.estimated_rate}</p>
+      <p style="margin:0 0 8px;color:#6b7280;font-size:12px;">${lender.type} • Up to $${lender.max_loan?.toLocaleString()} • ${m.estimated_rate}</p>
       <p style="margin:0 0 8px;color:#374151;font-size:13px;">${m.qualification_summary}</p>
       <p style="margin:0;color:#C9A84C;font-size:12px;font-weight:600;">Next Step: ${m.recommended_action}</p>
     </div>`;
@@ -161,7 +161,7 @@ async function main() {
           lender_id: lenders[m.lender_index - 1]?.id,
           match_score: m.match_score,
           qualification_summary: m.qualification_summary,
-          estimated_rate: m.estimated_rate,
+          estimated_rate: m.estimated_rate || null,
           status: "matched",
           matched_at: new Date().toISOString(),
         })).filter(m => m.lender_id);
