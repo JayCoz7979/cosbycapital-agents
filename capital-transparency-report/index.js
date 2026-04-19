@@ -51,7 +51,7 @@ async function buildTransparencyReport(profile, data) {
   const lenderRows = lenderMatches.slice(0, 10).map(m => `
     <tr>
       <td style="padding:10px 8px;border-bottom:1px solid #f3f4f6;font-size:12px;color:#0A1628;">${m.lenders?.name?.substring(0, 50) || "—"}</td>
-      <td style="padding:10px 8px;border-bottom:1px solid #f3f4f6;font-size:12px;color:#6b7280;">${m.lenders?.type || "—"}</td>
+      <td style="padding:10px 8px;border-bottom:1px solid #f3f4f6;font-size:12px;color:#6b7280;">${m.lenders?.type || "—"} • Up to $${m.lenders?.loan_max?.toLocaleString() || "—"}</td>
       <td style="padding:10px 8px;border-bottom:1px solid #f3f4f6;text-align:center;">
         <span style="background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;">${m.match_score}%</span>
       </td>
@@ -171,7 +171,7 @@ async function main() {
 
         const [grantMatchRes, lenderMatchRes, appRes] = await Promise.all([
           supabase.from("grant_matches").select("*, grants(name, funder, amount_max)").eq("profile_id", profile.id).order("match_score", { ascending: false }),
-          supabase.from("lender_matches").select("*, lenders(name, type, max_loan)").eq("profile_id", profile.id).order("match_score", { ascending: false }),
+          supabase.from("lender_matches").select("*, lenders(name, type, loan_min, loan_max)").eq("profile_id", profile.id).order("match_score", { ascending: false }),
           supabase.from("grant_applications").select("*, grants(name, funder)").eq("profile_id", profile.id).order("created_at", { ascending: false }),
         ]);
 

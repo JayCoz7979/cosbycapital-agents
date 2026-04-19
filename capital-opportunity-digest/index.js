@@ -31,7 +31,7 @@ async function buildDigestEmail(profile, grantMatches, lenderMatches) {
     <tr>
       <td style="padding:12px 8px;border-bottom:1px solid #f3f4f6;">
         <div style="font-weight:600;color:#0A1628;font-size:13px;">${m.lenders?.name || "Lender"}</div>
-        <div style="color:#6b7280;font-size:11px;margin-top:2px;">${m.lenders?.type} • Up to $${m.lenders?.max_loan?.toLocaleString()} • ${m.estimated_rate || "Rate TBD"}</div>
+        <div style="color:#6b7280;font-size:11px;margin-top:2px;">${m.lenders?.type} • Up to $${m.lenders?.loan_max?.toLocaleString()} • ${m.estimated_rate || "Rate TBD"}</div>
       </td>
       <td style="padding:12px 8px;border-bottom:1px solid #f3f4f6;text-align:center;">
         <span style="background:#eff6ff;color:#1d4ed8;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;">${m.match_score}%</span>
@@ -147,7 +147,7 @@ async function main() {
         // Get lender matches (top 5 by score)
         const { data: lenderMatches } = await supabase
           .from("lender_matches")
-          .select("*, lenders(*)")
+          .select("*, lenders(id,name,type,loan_min,loan_max)")
           .eq("profile_id", profile.id)
           .order("match_score", { ascending: false })
           .limit(5);
